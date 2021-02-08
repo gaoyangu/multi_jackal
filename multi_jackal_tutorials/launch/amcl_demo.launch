@@ -1,0 +1,22 @@
+<launch>
+
+  <arg name="ns0"        default="jackal0"/>
+  <arg name="ns1"        default="jackal1"/>
+
+  <!-- Run the map server -->
+ <arg name="map_file" default="$(find multi_jackal_tutorials)/maps/work_layout_v2.yaml"/>
+ <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+  <!--- Run AMCL -->
+  <include file="$(find multi_jackal_tutorials)/launch/amcl.launch">
+
+    <arg name="ns" value="jackal0"/>
+    <arg name="use_map_topic"   value="true" />
+    <arg name="scan_topic"      value="/$(arg ns0)/front/scan" />
+    <arg name="initial_pose_x" default="0" />
+    <arg name="initial_pose_y" default="0" />
+    <arg name="initial_pose_a"  value="1.57" />
+
+  </include>
+
+</launch>
