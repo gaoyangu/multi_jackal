@@ -7,10 +7,13 @@
   <arg name="rviz"       default="true"/>
   <arg name="ns0"        default="jackal0"/>
   <arg name="ns1"        default="jackal1"/>
+  <arg name="ns2"        default="jackal2"/>
   <arg name="config0"    default="front_laser"/>
   <arg name="config0_id" default="0"/>
   <arg name="config1"    default="front_laser"/>
   <arg name="config1_id" default="1"/>
+  <arg name="config2"    default="front_laser"/>
+  <arg name="config2_id" default="2"/>
   <arg name="world"      default="work_layout_v2.world"/>
 
   <!-- Start Gazebo with an empty world. -->
@@ -25,7 +28,7 @@
     <arg name="ns"            value="$(arg ns0)"/>
     <arg name="config"        value="$(arg config0)"/>
     <arg name="config_id"     value="$(arg config0_id)"/>
-    <arg name="use_move_base" value="false"/>
+    <arg name="use_move_base" value="true"/>
     <arg name="use_global_tf" default="false"/>
     <arg name="x"             value="-5.5"/>
     <arg name="y"             value="-3.5"/>
@@ -35,9 +38,20 @@
     <arg name="ns"            value="$(arg ns1)"/>
     <arg name="config"        value="$(arg config1)"/>
     <arg name="config_id"     value="$(arg config1_id)"/>
-    <arg name="use_move_base" value="false"/>
+    <arg name="use_move_base" value="true"/>
     <arg name="use_global_tf" default="false"/>
     <arg name="x"             value="-2.5"/>
+    <arg name="y"             value="-3.5"/>
+    <arg name="yaw"           value="1.57"/>
+  </include>
+
+  <include file="$(find multi_jackal_base)/launch/jackal_base.launch">
+    <arg name="ns"            value="$(arg ns2)"/>
+    <arg name="config"        value="$(arg config2)"/>
+    <arg name="config_id"     value="$(arg config2_id)"/>
+    <arg name="use_move_base" value="true"/>
+    <arg name="use_global_tf" default="false"/>
+    <arg name="x"             value="5"/>
     <arg name="y"             value="-3.5"/>
     <arg name="yaw"           value="1.57"/>
   </include>

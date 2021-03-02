@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+
+<!-- Launches Jackal Gazebo simulation in an empty world. -->
+
+<launch>
+    <arg name="ns0" default="jackal0"/>
+    <arg name="ns1" default="jackal1"/>
+    <arg name="ns2" default="jackal2"/>
+
+    <node pkg="multi_jackal_tutorials" type="move_base_square.py" name="move_base_square" ns="$(arg ns0)">
+        <param name="point0_x" value="0.0"/>
+        <param name="point0_y" value="4.0"/>
+        <param name="point0_theta" value="1.57"/>
+        <param name="point1_x" value="-3.0"/>
+        <param name="point1_y" value="4.0"/>
+        <param name="point0_theta" value="3.14"/>
+        <param name="point2_x" value="0.0"/>
+        <param name="point2_y" value="4.0"/>
+        <param name="point0_theta" value="0"/>
+        <param name="point3_x" value="5.0"/>
+        <param name="point3_y" value="2.5"/>
+        <param name="point0_theta" value="0"/>
+        <param name="point4_x" value="10.0"/>
+        <param name="point4_y" value="3.0"/>
+        <param name="point0_theta" value="0"/>
+        <param name="point5_x" value="14.0"/>
+        <param name="point5_y" value="4.0"/>
+        <param name="point0_theta" value="0"/>
+    </node>
+
+    <node pkg="multi_jackal_tutorials" type="move_base_square.py" name="move_base_square" ns="$(arg ns1)">
+        <param name="point0_x" value="3.0"/>
+        <param name="point0_y" value="6.5"/>
+        <param name="point0_theta" value="1.57"/>
+        <param name="point1_x" value="-3.0"/>
+        <param name="point1_y" value="6.5"/>
+        <param name="point1_theta" value="3.14"/>
+        <param name="point2_x" value="3.0"/>
+        <param name="point2_y" value="6.5"/>
+        <param name="point2_theta" value="0.0"/>
+        <param name="point3_x" value="5.0"/>
+        <param name="point3_y" value="5.5"/>
+        <param name="point3_theta" value="0.0"/>
+        <param name="point4_x" value="10.0"/>
+        <param name="point4_y" value="5.0"/>
+        <param name="point4_theta" value="0.0"/>
+        <param name="point5_x" value="14.0"/>
+        <param name="point5_y" value="2.0"/>
+        <param name="point5_theta" value="0.0"/>
+    </node>
+
+    <node pkg="multi_jackal_tutorials" type="move_base_square.py" name="move_base_square" ns="$(arg ns2)">
+        <param name="point0_x" value="10.5"/>
+        <param name="point0_y" value="0.0"/>
+        <param name="point0_theta" value="1.57"/>
+        <param name="point1_x" value="10.0"/>
+        <param name="point1_y" value="3"/>
+        <param name="point1_theta" value="3.14"/>
+        <param name="point2_x" value="5.0"/>
+        <param name="point2_y" value="2.5"/>
+        <param name="point2_theta" value="3.14"/>
+        <param name="point3_x" value="0.0"/>
+        <param name="point3_y" value="4.0"/>
+        <param name="point3_theta" value="3.14"/>
+        <param name="point4_x" value="-2.0"/>
+        <param name="point4_y" value="4.0"/>
+        <param name="point4_theta" value="3.14"/>
+        <param name="point5_x" value="-3.0"/>
+        <param name="point5_y" value="4.0"/>
+        <param name="point5_theta" value="3.14"/>
+    </node>
+</launch>
