@@ -27,12 +27,15 @@ from tf.transformations import quaternion_from_euler
 from visualization_msgs.msg import Marker
 from math import radians, pi
 
+from multi_control.msg import RobotStatus
+
 class MoveBaseSquare():
     def __init__(self):
         rospy.init_node('nav_test', anonymous=False)
         
         rospy.on_shutdown(self.shutdown)
-        
+
+        robot_id = rospy.get_param("~robot_id", 0)
         # How big is the square we want the robot to navigate?
         square_size = rospy.get_param("~square_size", 1.0) # meters
         waypoints_size = rospy.get_param("~waypoints_size", 6)
@@ -103,6 +106,8 @@ class MoveBaseSquare():
             
         # Publisher to manually control the robot (e.g. to stop it, queue_size=5)
         self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=5)
+
+        self.goal_status_pub = rospy.Publisher('goal_status', RobotStatus, queue_size=10)
         
         # Subscribe to the move_base action server
         self.move_base = actionlib.SimpleActionClient("move_base", MoveBaseAction)
@@ -117,7 +122,7 @@ class MoveBaseSquare():
         
         # Initialize a counter to track waypoints
         i = 0
-        
+        timeBegin = rospy.Time.now()
         # Cycle through the four waypoints
         while i < waypoints_size and not rospy.is_shutdown():
             # Update the marker display
@@ -139,6 +144,16 @@ class MoveBaseSquare():
             self.move(goal)
             
             i += 1
+        
+        timeEnd = rospy.Time.now()
+        time = timeEnd - timeBegin
+        status_msgs = RobotStatus()
+        status_msgs.Header.stamp = rospy.Time.now()
+        status_msgs.is_ready = True
+        self.goal_status_pub.publish(status_msgs)
+        rospy.loginfo("sucess...%d,use time: %f", robot_id, time.to_sec())
+
+        rospy.spin()
         
     def move(self, goal):
             # Send the goal pose to the MoveBaseAction server
